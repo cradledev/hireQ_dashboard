@@ -1,0 +1,30 @@
+<!--*******************
+        Preloader start
+********************-->
+<div id="preloader">
+  <div class="sk-three-bounce">
+      <div class="sk-child sk-bounce1"></div>
+      <div class="sk-child sk-bounce2"></div>
+      <div class="sk-child sk-bounce3"></div>
+  </div>
+</div>
+<!--*******************
+  Preloader end
+********************-->
+<div *ngIf="authService.isLoggedIn" id="main-wrapper">
+  <app-header></app-header>
+  <app-sidebar></app-sidebar>
+  <div class="content-body">
+    <div class="container-fluid">
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>
+  
+  <app-footer></app-footer>
+</div>
+<div *ngIf="!authService.isLoggedIn" class="h-100">
+    <router-outlet></router-outlet>
+</div>
+
