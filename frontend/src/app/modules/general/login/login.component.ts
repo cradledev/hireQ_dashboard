@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
       this.isLoggedIn = true;
       this.isLoginFailed = false;
       // this.reloadPage();
-      window.location.href = "/dashboard";
+      // window.location.href = "/dashboard";
+      window.location.reload();
     } else {
       this.isLoginFailed = true;
       this.isLoggedIn = false;
