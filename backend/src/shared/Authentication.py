@@ -59,6 +59,7 @@ class Auth():
     """
     @wraps(func)
     def decorated_auth(*args, **kwargs):
+      print(request.headers)
       if 'api-token' not in request.headers:
         return Response(
           mimetype="application/json",

@@ -1,6 +1,7 @@
 #/src/views/UserView
 
 from flask import request, json, Response, Blueprint, g
+from marshmallow import ValidationError
 from ..models.UserModel import UserModel, UserSchema
 from ..shared.Authentication import Auth
 
@@ -13,10 +14,14 @@ def create():
   Create User Function
   """
   req_data = request.get_json()
-  data, error = user_schema.load(req_data)
-
-  if error:
+  try:
+    data = user_schema.load(req_data)
+  except ValidationError as error:
+    print("ERROR: package.json is invalid")
+    print(error.messages)
     return custom_response(error, 400)
+  # if error:
+  #   return custom_response(error, 400)
   
   # check if user already exist in the db
   user_in_db = UserModel.get_user_by_email(data.get('email'))
@@ -26,8 +31,11 @@ def create():
   
   user = UserModel(data)
   user.save()
-  ser_data = user_schema.dump(user).data
+  ser_data = user_schema.dump(user)
+  print("=======================")
+  print(ser_data.get('id'))
   token = Auth.generate_token(ser_data.get('id'))
+  print(token)
   return custom_response({'jwt_token': token}, 201)
 
 @user_api.route('/', methods=['GET'])

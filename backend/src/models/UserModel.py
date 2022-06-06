@@ -1,35 +1,65 @@
 # src/models/UserModel.py
 from marshmallow import fields, Schema
 import datetime
+
 from . import db, bcrypt
-from .BlogpostModel import BlogpostSchema
+# import enum
+
+# class UserTypes(enum.Enum):
+#   TALENT = "Talent"
+#   COMPANY = "Company"
+#   ADMIN = "Admin"
+
+#   @classmethod
+#   def choices(cls):
+#     return [(choice, choice.value) for choice in cls]
+
+#   @classmethod
+#   def coerce(cls, item):
+#     """item will be both type(enum) AND type(unicode).
+#     """
+#     if item == 'Talent' or item == UserTypes.TALENT:
+#         return UserTypes.TALENT
+#     elif item == 'Company' or item == UserTypes.COMPANY:
+#         return UserTypes.COMPANY
+#     elif item == 'Admin' or item == UserTypes.ADMIN:
+#         return UserTypes.ADMIN
+#     else:
+#         print
+#         "Can't coerce", item, type(item)
+
+#   @classmethod
+#   def from_name(cls, name):
+#     for estado, estado_name in UserTypes.choices():
+#       if estado_name == name or name == str(estado):
+#           return estado
+#     raise ValueError('{} is not a valid EstadoCita name'.format(name))
+
 
 class UserModel(db.Model):
   """
   User Model
   """
-
   # table name
   __tablename__ = 'users'
 
   id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(128), nullable=False)
   email = db.Column(db.String(128), unique=True, nullable=False)
   password = db.Column(db.String(128), nullable=False)
   created_at = db.Column(db.DateTime)
   modified_at = db.Column(db.DateTime)
-  blogposts = db.relationship('BlogpostModel', backref='users', lazy=True)
+  type = db.Column(db.String(128))
 
   # class constructor
   def __init__(self, data):
     """
     Class constructor
     """
-    self.name = data.get('name')
     self.email = data.get('email')
     self.password = self.__generate_hash(data.get('password'))
     self.created_at = datetime.datetime.utcnow()
     self.modified_at = datetime.datetime.utcnow()
+    self.type = data.get('type')
 
   def save(self):
     db.session.add(self)
@@ -70,10 +100,9 @@ class UserModel(db.Model):
 
 class UserSchema(Schema):
   id = fields.Int(dump_only=True)
-  name = fields.Str(required=True)
   email = fields.Email(required=True)
   password = fields.Str(required=True, load_only=True)
   created_at = fields.DateTime(dump_only=True)
   modified_at = fields.DateTime(dump_only=True)
-  blogposts = fields.Nested(BlogpostSchema, many=True)
+  type = fields.Str(required=True)
 

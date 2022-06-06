@@ -1,80 +1,80 @@
 #/src/views/BlogpostView.py
 from flask import request, g, Blueprint, json, Response
 from ..shared.Authentication import Auth
-from ..models.BlogpostModel import BlogpostModel, BlogpostSchema
+from ..models.TalentModel import TalentModel, TalentSchema
 
-blogpost_api = Blueprint('blogpost_api', __name__)
-blogpost_schema = BlogpostSchema()
+talent_api = Blueprint('talent_api', __name__)
+talent_schema = TalentSchema()
 
 
-@blogpost_api.route('/', methods=['POST'])
+@talent_api.route('/', methods=['POST'])
 @Auth.auth_required
 def create():
   """
-  Create Blogpost Function
+  Create Talent Function
   """
   req_data = request.get_json()
   req_data['owner_id'] = g.user.get('id')
-  data, error = blogpost_schema.load(req_data)
+  data, error = talent_schema.load(req_data)
   if error:
     return custom_response(error, 400)
-  post = BlogpostModel(data)
+  post = TalentModel(data)
   post.save()
-  data = blogpost_schema.dump(post).data
+  data = talent_schema.dump(post).data
   return custom_response(data, 201)
 
-@blogpost_api.route('/', methods=['GET'])
+@talent_api.route('/', methods=['GET'])
 def get_all():
   """
-  Get All Blogposts
+  Get All Talents
   """
-  posts = BlogpostModel.get_all_blogposts()
-  data = blogpost_schema.dump(posts, many=True).data
+  posts = TalentModel.get_all_blogposts()
+  data = talent_schema.dump(posts, many=True).data
   return custom_response(data, 200)
 
-@blogpost_api.route('/<int:blogpost_id>', methods=['GET'])
+@talent_api.route('/<int:blogpost_id>', methods=['GET'])
 def get_one(blogpost_id):
   """
-  Get A Blogpost
+  Get A Talent
   """
-  post = BlogpostModel.get_one_blogpost(blogpost_id)
+  post = TalentModel.get_one_blogpost(blogpost_id)
   if not post:
     return custom_response({'error': 'post not found'}, 404)
-  data = blogpost_schema.dump(post).data
+  data = talent_schema.dump(post).data
   return custom_response(data, 200)
 
-@blogpost_api.route('/<int:blogpost_id>', methods=['PUT'])
+@talent_api.route('/<int:blogpost_id>', methods=['PUT'])
 @Auth.auth_required
 def update(blogpost_id):
   """
-  Update A Blogpost
+  Update A Talent
   """
   req_data = request.get_json()
-  post = BlogpostModel.get_one_blogpost(blogpost_id)
+  post = TalentModel.get_one_blogpost(blogpost_id)
   if not post:
     return custom_response({'error': 'post not found'}, 404)
-  data = blogpost_schema.dump(post).data
+  data = talent_schema.dump(post).data
   if data.get('owner_id') != g.user.get('id'):
     return custom_response({'error': 'permission denied'}, 400)
   
-  data, error = blogpost_schema.load(req_data, partial=True)
+  data, error = talent_schema.load(req_data, partial=True)
   if error:
     return custom_response(error, 400)
   post.update(data)
   
-  data = blogpost_schema.dump(post).data
+  data = talent_schema.dump(post).data
   return custom_response(data, 200)
 
-@blogpost_api.route('/<int:blogpost_id>', methods=['DELETE'])
+@talent_api.route('/<int:blogpost_id>', methods=['DELETE'])
 @Auth.auth_required
 def delete(blogpost_id):
   """
-  Delete A Blogpost
+  Delete A Talent
   """
-  post = BlogpostModel.get_one_blogpost(blogpost_id)
+  post = TalentModel.get_one_blogpost(blogpost_id)
   if not post:
     return custom_response({'error': 'post not found'}, 404)
-  data = blogpost_schema.dump(post).data
+  data = talent_schema.dump(post).data
   if data.get('owner_id') != g.user.get('id'):
     return custom_response({'error': 'permission denied'}, 400)
 
