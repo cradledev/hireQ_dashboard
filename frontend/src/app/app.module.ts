@@ -11,6 +11,9 @@ import { FooterModule } from './components/footer/footer.module';
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/auth/auth.guard';
 import { SecureInnerPagesGuard } from './services/auth/secure-inner-pages.guard';
+import { HttpClientModule } from '@angular/common/http';
+import { ConfigService } from './services/config/config.service';
+import { TokenStorageService } from './services/auth/token-storage.service';
 
 
 @NgModule({
@@ -19,16 +22,20 @@ import { SecureInnerPagesGuard } from './services/auth/secure-inner-pages.guard'
     NotFoundComponent,
   ],
   imports: [
+    BrowserModule.withServerTransition({ appId: 'angular-starter' }),
     BrowserModule,
     AppRoutingModule,
     SidebarModule,
     HeaderModule,
     FooterModule,
+    HttpClientModule
   ],
   providers: [
     AuthService,
     AuthGuard,
-    SecureInnerPagesGuard
+    SecureInnerPagesGuard,
+    ConfigService,
+    TokenStorageService
   ],
   bootstrap: [AppComponent]
 })

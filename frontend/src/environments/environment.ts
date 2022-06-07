@@ -3,7 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  config: {
+    /* SELECT ONE OF THOSE CONFIGURATIONS */
+
+    /* LOCAL JSON (NO CRUD) */
+    endpoint: 'http://192.168.116.39:5000/api/v1',
+    hostAddress : 'http://192.168.116.39:5000'
+
+    /* LOCAL REST API CRUD WITH POSTGRESQL */
+    /* api: true,
+    url: 'http://localhost:5004/', */
+  },
 };
 
 /*

@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
 
+import { TokenStorageService } from './token-storage.service';
 @Injectable({
   providedIn: 'root'
 })
 export class SecureInnerPagesGuard implements CanActivate {
-  constructor(public authService : AuthService, public router : Router) {}
+  constructor(public tokenStorageService : TokenStorageService, public router : Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     // return true;
-    if (this.authService.isLoggedIn) {
+    if (this.tokenStorageService.getToken() != null) {
       // window.alert('Access Denied, Login is Required to Access This Page!');
       this.router.navigate(['/dashboard']);
     }

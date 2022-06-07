@@ -1,36 +1,33 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+};
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
   constructor(
-    public router: Router
-  ) { }
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null ? true : false;
+    private http: HttpClient
+  ) {
   }
 
   // Auth logic to run auth providers
-  AuthLogin(provider: any) :boolean {
-    if (provider.user_email == "admin@gmail.com" && provider.password == "admin") {
-      localStorage.setItem('user', JSON.stringify(provider));
-      return true;
-    } else {
-      localStorage.setItem('user', JSON.stringify(null));
-      return false;
-    }
+  AuthLogin(_payloads: any, url: string): Observable<any> {
+    return this.http.post(url, {
+      "email": _payloads.email,
+      "password": _payloads.password
+    }, httpOptions)
   }
 
-  AuthSignup (provider : any) {
-    
-  }
-  // Sign out
-  SignOut() {
-    localStorage.removeItem('user');
-    return this.router.navigate(['/login']);
+  AuthSignup(_payloads: any, url: string): Observable<any> {
+    return this.http.post(url, {
+      'email': _payloads.email,
+      'password': _payloads.password,
+      'type': "admin"
+    }, httpOptions);
   }
 }

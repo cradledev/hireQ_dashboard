@@ -13,16 +13,9 @@
                                 <h4 class="text-center mb-4 text-white">Sign up your account</h4>
                                 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
                                     <div class="form-group">
-                                        <label class="mb-1 text-white"><strong>Username</strong></label>
-                                        <input type="text" class="form-control" placeholder="username" formControlName="user_name">
-                                        <p class="lblError"
-                                            *ngIf="signupForm.get('user_name')!.hasError('required') && !signupForm.get('user_name')!.pristine">
-                                            UserName is Required
-                                        </p>
-                                    </div>
-                                    <div class="form-group">
                                         <label class="mb-1 text-white"><strong>Email</strong></label>
-                                        <input type="email" class="form-control" placeholder="hello@example.com" formControlName="user_email">
+                                        <input type="email" class="form-control" placeholder="hello@example.com"
+                                            formControlName="user_email">
                                         <p class="lblError"
                                             *ngIf="signupForm.get('user_email')!.hasError('required') && !signupForm.get('user_email')!.pristine">
                                             Please provide your E-mail
@@ -33,7 +26,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1 text-white"><strong>Password</strong></label>
-                                        <input type="password" class="form-control" value="" formControlName="user_password">
+                                        <input type="password" class="form-control" value=""
+                                            formControlName="user_password">
                                         <p class="lblError"
                                             *ngIf="signupForm.get('user_password')!.hasError('required') && !signupForm.get('user_password')!.pristine">
                                             Password is Required
@@ -41,7 +35,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1 text-white"><strong>Confirm Password</strong></label>
-                                        <input type="password" class="form-control" value="" formControlName="user_confirmPassword">
+                                        <input type="password" class="form-control" value=""
+                                            formControlName="user_confirmPassword">
                                         <p class="lblError"
                                             *ngIf="signupForm.get('user_confirmPassword')!.hasError('required') && !signupForm.get('user_confirmPassword')!.pristine">
                                             Confirm Password is Required
@@ -52,14 +47,26 @@
                                         </p>
                                     </div>
                                     <div class="text-center mt-4">
-                                        <button type="submit" [disabled]="signupForm.invalid" class="btn bg-white text-primary btn-block">Sign me
+                                        <button type="submit" [disabled]="signupForm.invalid"
+                                            class="btn bg-white text-primary btn-block">Sign me
                                             up</button>
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="lblError"
+                                            *ngIf="isSignUpFailed">
+                                            Signup failed!<br />{{ errorMessage }}
+                                        </p>
                                     </div>
                                 </form>
+                               
                                 <div class="new-account mt-3">
                                     <p class="text-white">Already have an account? <a class="text-white"
                                             [routerLink]="'/login'">Sign in</a></p>
                                 </div>
+                                <div class="alert alert-success" *ngIf="isSuccessful">
+                                    Your registration is successful!
+                                  </div>
                             </div>
                         </div>
                     </div>
