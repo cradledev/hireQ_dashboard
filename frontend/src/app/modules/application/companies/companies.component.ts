@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 import { CompanyService } from 'src/app/services/company/company.service';
 import { ConfigService } from 'src/app/services/config/config.service';
@@ -21,9 +21,10 @@ export class CompaniesComponent implements OnInit {
   pageLengthForm: FormGroup;
   pageLengthList: number[] = [4, 8, 12, 16];
 
-  selectedCompany: boolean = false;
+  isSelectedCompany: boolean = false;
+  selectedCompany = new CompanyModel();
 
-  constructor(private companyService: CompanyService, private configService: ConfigService, public fb: FormBuilder) {
+  constructor(private companyService: CompanyService, public configService: ConfigService, public fb: FormBuilder) {
     this.pageLengthForm = this.fb.group({
       pageLength: [this.itemsPerPage]
     });
@@ -68,13 +69,13 @@ export class CompaniesComponent implements OnInit {
 
   // select company 
   onSelectCompany(id : any) : void {
-    this.selectedCompany = true;
-    console.log(id);
+    this.isSelectedCompany = true;
+    this.selectedCompany = this.companies[this.companies.findIndex(item => item.id == id)]
   }
 
   // hide company detail board
   onCloseDetailCompany(id : any) : void {
-    this.selectedCompany = false;
-    
+    this.isSelectedCompany = false;
+    this.selectedCompany = new CompanyModel();
   }
 }

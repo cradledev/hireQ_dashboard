@@ -1,15 +1,16 @@
 <div class="row">
-    <div [ngClass]="{'col-xl-9 col-xxl-8' : selectedCompany === true, 'col-xl-12 col-xxl-12' : selectedCompany === false}">
+    <div
+        [ngClass]="{'col-xl-9 col-xxl-8' : isSelectedCompany === true, 'col-xl-12 col-xxl-12' : isSelectedCompany === false}">
         <div class="row sp-sm-15">
             <div class="col-xl-12">
-                <div
-                    class="d-flex flex-wrap search-job-xl bg-white rounded py-3 px-md-3 px-0 mb-4 align-items-center">
+                <div class="d-flex flex-wrap search-job-xl bg-white rounded py-3 px-md-3 px-0 mb-4 align-items-center">
                     <div class="col-xl-9 col-xxl-12 col-lg-9 d-flex flex-wrap">
                         <input class="form-control input-rounded mr-auto mb-2 mb-md-0" type="text"
                             placeholder="Search by Title, Company or any jobs keyword...">
                     </div>
                     <div class="col-xl-3 col-xxl-12 col-lg-3 search-dropdown aroundYou">
-                        <a href="javascript:void(0);" class="btn btn-primary rounded  mb-0 mb-md-0 mb-sm-2"><i class="las la-search scale5 mr-3"></i>FIND</a>
+                        <a href="javascript:void(0);" class="btn btn-primary rounded  mb-0 mb-md-0 mb-sm-2"><i
+                                class="las la-search scale5 mr-3"></i>FIND</a>
                     </div>
                 </div>
                 <div class="d-flex mb-4 border-bottom flex-wrap align-items-center">
@@ -69,34 +70,37 @@
                 </div>
             </div>
         </div>
-        <app-grid-company [items]="companies" [itemsCount]="companies.length" (selectItem)="onSelectCompany($event)"></app-grid-company>
+        <app-grid-company [items]="companies" [itemsCount]="companies.length" (selectItem)="onSelectCompany($event)">
+        </app-grid-company>
     </div>
-    <div *ngIf="selectedCompany === true" class="col-xl-3 col-xxl-4">
+    <div *ngIf="isSelectedCompany === true" class="col-xl-3 col-xxl-4">
         <div class="row">
             <div class="col-xl-12">
-                <button type="button" (click)="onCloseDetailCompany(selectedCompany)">&times;</button>
+                <button type="button" class="close" (click)="onCloseDetailCompany(isSelectedCompany)">&times;</button>
                 <div class="card d-sm-flex flex-xl-column flex-md-row">
                     <div class="card-body border-bottom text-center col-xl-12 col-md-6">
-                        <svg class="mb-4" width="134" height="134" viewBox="0 0 134 134" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
+                        <svg *ngIf="selectedCompany.avator == null" class="mb-4" width="134" height="134" viewBox="0 0 80 80"
+                            fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
-                                d="M0 19.4909C0 8.72638 8.72638 0 19.4909 0H114.509C125.274 0 134 8.72638 134 19.4909V114.509C134 125.274 125.274 134 114.509 134H19.4909C8.72638 134 0 125.274 0 114.509V19.4909Z"
-                                fill="#D3D3D3"></path>
+                                d="M0 11.6364C0 5.20978 5.20978 0 11.6364 0H68.3636C74.7902 0 80 5.20978 80 11.6364V68.3636C80 74.7902 74.7902 80 68.3636 80H11.6364C5.20978 80 0 74.7902 0 68.3636V11.6364Z"
+                                fill="#D3D3D3" />
                             <path
-                                d="M0 19.4909C0 8.72638 8.72638 0 19.4909 0H114.509C125.274 0 134 8.72638 134 19.4909V114.509C134 125.274 125.274 134 114.509 134H19.4909C8.72638 134 0 125.274 0 114.509V19.4909Z"
-                                fill="#40C7CF"></path>
+                                d="M0 11.6364C0 5.20978 5.20978 0 11.6364 0H68.3636C74.7902 0 80 5.20978 80 11.6364V68.3636C80 74.7902 74.7902 80 68.3636 80H11.6364C5.20978 80 0 74.7902 0 68.3636V11.6364Z"
+                                fill="#4B58CF" />
                             <path
-                                d="M34.5414 34.5417C38.7631 30.32 43.7751 26.9711 49.291 24.6863C54.807 22.4015 60.719 21.2255 66.6895 21.2255C72.6599 21.2255 78.5719 22.4015 84.0879 24.6863C89.6039 26.9711 94.6158 30.32 98.8376 34.5417C103.059 38.7635 106.408 43.7754 108.693 49.2914C110.978 54.8074 112.154 60.7194 112.154 66.6898C112.154 72.6603 110.978 78.5723 108.693 84.0882C106.408 89.6042 103.059 94.6162 98.8376 98.8379L82.7635 82.7639C84.8744 80.653 86.5488 78.147 87.6912 75.389C88.8336 72.631 89.4216 69.675 89.4216 66.6898C89.4216 63.7046 88.8336 60.7486 87.6912 57.9906C86.5488 55.2326 84.8744 52.7266 82.7635 50.6158C80.6526 48.5049 78.1467 46.8304 75.3887 45.6881C72.6307 44.5457 69.6747 43.9577 66.6895 43.9577C63.7042 43.9577 60.7482 44.5457 57.9902 45.6881C55.2323 46.8305 52.7263 48.5049 50.6154 50.6158L34.5414 34.5417Z"
-                                fill="#8FD7FF"></path>
+                                d="M20.6216 20.6219C23.142 18.1015 26.1342 16.1022 29.4273 14.7381C32.7205 13.374 36.25 12.672 39.8145 12.672C43.3789 12.672 46.9085 13.374 50.2016 14.7381C53.4947 16.1022 56.4869 18.1015 59.0074 20.6219C61.5278 23.1424 63.5271 26.1346 64.8912 29.4277C66.2552 32.7208 66.9573 36.2504 66.9573 39.8148C66.9573 43.3793 66.2552 46.9088 64.8912 50.202C63.5271 53.4951 61.5278 56.4873 59.0074 59.0077L49.4109 49.4113C50.6711 48.1511 51.6708 46.6549 52.3528 45.0084C53.0348 43.3618 53.3859 41.5971 53.3859 39.8148C53.3859 38.0326 53.0348 36.2678 52.3528 34.6213C51.6708 32.9747 50.6711 31.4786 49.4109 30.2184C48.1507 28.9582 46.6546 27.9585 45.008 27.2765C43.3615 26.5944 41.5967 26.2434 39.8145 26.2434C38.0322 26.2434 36.2675 26.5944 34.6209 27.2765C32.9743 27.9585 31.4782 28.9582 30.218 30.2184L20.6216 20.6219Z"
+                                fill="#8FD7FF" />
                             <path
-                                d="M34.5413 98.8379C26.0151 90.3117 21.2252 78.7477 21.2252 66.6898C21.2252 54.6319 26.0151 43.0679 34.5413 34.5417C43.0675 26.0155 54.6316 21.2255 66.6894 21.2255C78.7473 21.2255 90.3113 26.0155 98.8375 34.5417L82.7635 50.6158C78.5004 46.3527 72.7184 43.9577 66.6894 43.9577C60.6605 43.9577 54.8785 46.3527 50.6154 50.6158C46.3523 54.8789 43.9573 60.6609 43.9573 66.6898C43.9573 72.7188 46.3523 78.5008 50.6154 82.7639L34.5413 98.8379Z"
-                                fill="white"></path>
+                                d="M20.6216 59.0077C15.5313 53.9174 12.6716 47.0135 12.6716 39.8148C12.6716 32.6161 15.5313 25.7122 20.6215 20.6219C25.7118 15.5316 32.6157 12.6719 39.8144 12.6719C47.0132 12.6719 53.9171 15.5316 59.0073 20.6219L49.4109 30.2183C46.8658 27.6732 43.4138 26.2434 39.8144 26.2434C36.2151 26.2434 32.7631 27.6732 30.218 30.2183C27.6729 32.7635 26.243 36.2154 26.243 39.8148C26.243 43.4141 27.6729 46.8661 30.218 49.4112L20.6216 59.0077Z"
+                                fill="white" />
                         </svg>
-                        <h4 class="fs-22 text-black font-w600 mb-1">Highspeed Studios</h4>
-                        <p>Creative Design Agency</p>
-                        <a href="javascript:void(0);" class="btn btn-outline-primary d-block rounded">+ Follow</a>
+                        <img *ngIf="selectedCompany.avator != null" [src]="configService.config.hostAddress + selectedCompany?.avator"
+                            width="134" height="134" class="rounded mb-4" alt="Company Avatar">
+                        <h4 class="fs-22 text-black font-w600 mb-1">{{selectedCompany?.name ?? "No Name"}}</h4>
+                        <!-- <p>Creative Design Agency</p> -->
+                        <!-- <a href="javascript:void(0);" class="btn btn-outline-primary d-block rounded">+ Follow</a> -->
                         <div class="row mt-5">
-                            <div class="d-flex flex-wrap col-xl-12">
+                            <!-- <div class="d-flex flex-wrap col-xl-12">
                                 <div class="media mr-auto pr-2 mb-4">
                                     <svg class="mr-3 min-w46" width="46" height="46" viewBox="0 0 46 46" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -126,7 +130,7 @@
                                         <span class="fs-14">Reviews</span>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-xl-12">
                                 <div class="media">
                                     <svg class="mr-3 min-w46" width="46" height="46" viewBox="0 0 46 46" fill="none"
@@ -137,7 +141,7 @@
                                             fill="#808080"></path>
                                     </svg>
                                     <div class="media-body text-left">
-                                        <h4 class="fs-18 text-black font-w600 mb-0">London, England</h4>
+                                        <h4 class="fs-18 text-black font-w600 mb-0">{{selectedCompany?.region?.city ?? "No City"}}, {{selectedCompany?.region?.country ?? "No Country"}}</h4>
                                         <span class="fs-14">Location</span>
                                     </div>
                                 </div>
@@ -146,13 +150,10 @@
                     </div>
                     <div class="card-body col-xl-12 col-md-6 border-left ">
                         <h6 class="fs-16 text-black font-w600 mb-4">About Company</h6>
-                        <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua.</p>
-                        <p class="fs-14">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in</p>
+                        <p class="fs-14">{{selectedCompany?.description ?? ""}}</p>
                         <div class="d-flex justify-content-between flex-wrap pt-3">
-                            <a href="javascript:void(0);" class="btn btn-primary btn-rounded btn-sm mb-2">23 Vacancy</a>
-                            <a href="app-profile.html" class="btn btn-dark btn-rounded btn-sm mb-2">More Detail</a>
+                            <!-- <a href="javascript:void(0);" class="btn btn-primary btn-rounded btn-sm mb-2">23 Vacancy</a> -->
+                            <a class="btn btn-dark btn-rounded btn-sm mb-2">More Detail</a>
                         </div>
                     </div>
                 </div>
