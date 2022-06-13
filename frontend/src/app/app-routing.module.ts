@@ -17,12 +17,12 @@ const routes: Routes = [
       .then(mod => mod.DashboardModule),
     canActivate: [AuthGuard],
   },
-  {
-    path: 'statistics',
-    loadChildren: () => import('./modules/application/statistics/statistics.module')
-      .then(mod => mod.StatisticsModule),
-    canActivate: [AuthGuard],
-  },
+  // {
+  //   path: 'statistics',
+  //   loadChildren: () => import('./modules/application/statistics/statistics.module')
+  //     .then(mod => mod.StatisticsModule),
+  //   canActivate: [AuthGuard],
+  // },
   {
     path: "companies",
     loadChildren: () => import('./modules/application/companies/companies.module')

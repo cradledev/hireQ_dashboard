@@ -14,6 +14,7 @@ import { SecureInnerPagesGuard } from './services/auth/secure-inner-pages.guard'
 import { HttpClientModule } from '@angular/common/http';
 import { ConfigService } from './services/config/config.service';
 import { TokenStorageService } from './services/auth/token-storage.service';
+import { authInterceptorProviders } from './helpers/auth.interceptor';
 
 
 @NgModule({
@@ -28,14 +29,16 @@ import { TokenStorageService } from './services/auth/token-storage.service';
     SidebarModule,
     HeaderModule,
     FooterModule,
-    HttpClientModule
+    HttpClientModule,
+
   ],
   providers: [
     AuthService,
     AuthGuard,
     SecureInnerPagesGuard,
     ConfigService,
-    TokenStorageService
+    TokenStorageService,
+    authInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })

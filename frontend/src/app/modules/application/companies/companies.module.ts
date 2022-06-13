@@ -8,6 +8,7 @@ import { GridCompanyModule } from '../../../components/grid-company/grid-company
 import { PaginationModule } from '../../../components/pagination/pagination.module';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { VdoPlayerModule } from '../../../components/vdo-player/vdo-player.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     CompaniesRoutingModule,
     GridCompanyModule,
     PaginationModule,
+    VdoPlayerModule,
   ],
   exports : [
     CompaniesComponent

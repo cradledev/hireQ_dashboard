@@ -8,8 +8,8 @@ import { TokenStorageService } from 'src/app/services/auth/token-storage.service
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private tokenStorage: TokenStorageService, private router : Router) { }
-
+  constructor(public tokenStorage: TokenStorageService, private router : Router) { }
+  
   ngOnInit(): void {
   }
   onLogOut(): void {

@@ -10,7 +10,8 @@
                 </svg>
                 <img *ngIf="item.avator != null" [src]="configService.config.hostAddress + item?.avator" width="80" height="80" class="rounded mb-4" alt="Company Avatar">
                 <h6 class="font-w600 fs-16 mb-1"><a class="text-black">{{item.name == null ? "No Name" : item.name}}</a></h6>
-                <span class="fs-14">{{item.region?.country ?? "No Region"}}</span>
+                <span class="fs-14 d-block">{{item.region?.country ?? "No Region"}}</span>
+                <span class="fs-14">{{ item?.created_at | date : 'yyyy-MM-dd'}}</span>
             </div>
         </div>
     </div>

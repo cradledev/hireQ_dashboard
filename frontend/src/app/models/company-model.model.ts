@@ -11,5 +11,5 @@ export class CompanyModel {
     phone_number : any;
     region : any;
     description : any;
-    accont_manager_name : any;
+    account_manager_name : any;
 }

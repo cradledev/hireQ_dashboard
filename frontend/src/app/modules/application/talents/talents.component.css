@@ -1,0 +1,4 @@
+.talent-detail {
+    overflow-y: auto;
+    max-height: 700px;
+}

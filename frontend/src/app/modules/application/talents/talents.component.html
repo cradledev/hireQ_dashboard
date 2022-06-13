@@ -2,509 +2,104 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Profile Datatable</h4>
+                <h4 class="card-title">Talents Datatable</h4>
+
+            </div>
+            <div class="card-header">
+                <div class="">
+                    <form [formGroup]="pageLengthForm" class="form-inline">
+                        <div class="form-group">
+                            <label>Page : </label>
+                            <select class="form-control default-select" (change)="changePageLength($event)"
+                                formControlName="pageLength">
+                                <option *ngFor="let item of pageLengthList; let i = index" [value]="item">
+                                    {{ item }}
+                                </option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="dataTables_filter">
+                    <app-pagination [count]="itemsCount" [page]="itemsPage" [perPage]="itemsPerPage"
+                        (changePage)="onChangePage($event)"></app-pagination>
+                </div>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
-                    <table id="example3" class="display min-w850">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Name</th>
-                                <th>Department</th>
-                                <th>Gender</th>
-                                <th>Education</th>
-                                <th>Mobile</th>
-                                <th>Email</th>
-                                <th>Joining Date</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic1.jpg" alt=""></td>
-                                <td>Tiger Nixon</td>
-                                <td>Architect</td>
-                                <td>Male</td>
-                                <td>M.COM., P.H.D.</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2011/04/25</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>												
-                                </td>												
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic2.jpg" alt=""></td>
-                                <td>Garrett Winters</td>
-                                <td>Accountant</td>
-                                <td>Female</td>
-                                <td>M.COM., P.H.D.</td>
-                                <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2011/07/25</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic3.jpg" alt=""></td>
-                                <td>Ashton Cox</td>
-                                <td>Junior Technical</td>
-                                <td>Male</td>
-                                <td>B.COM., M.COM.</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2009/01/12</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic4.jpg" alt=""></td>
-                                <td>Cedric Kelly</td>
-                                <td>Developer</td>
-                                <td>Male</td>
-                                <td>B.COM., M.COM.</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2012/03/29</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic5.jpg" alt=""></td>
-                                <td>Airi Satou</td>
-                                <td>Accountant</td>
-                                <td>Female</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2008/11/28</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic6.jpg" alt=""></td>
-                                <td>Brielle Williamson</td>
-                                <td>Specialist</td>
-                                <td>Male</td>
-                                <td>B.COM., M.COM.</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2012/12/02</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic7.jpg" alt=""></td>
-                                <td>Herrod Chandler</td>
-                                <td>Sales Assistant</td>
-                                <td>Female</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2012/08/06</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic8.jpg" alt=""></td>
-                                <td>Rhona Davidson</td>
-                                <td>Integration</td>
-                                <td>Male</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2010/10/14</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic9.jpg" alt=""></td>
-                                <td>Colleen Hurst</td>
-                                <td>Javascript Developer</td>
-                                <td>Female</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2009/09/15</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic10.jpg" alt=""></td>
-                                <td>Sonya Frost</td>
-                                <td>Software Engineer</td>
-                                <td>Male</td>
-                                <td>B.COM., M.COM.</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2008/12/13</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic1.jpg" alt=""></td>
-                                <td>Jena Gaines</td>
-                                <td>Office Manager</td>
-                                <td>Female</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2008/12/19</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic2.jpg" alt=""></td>
-                                <td>Quinn Flynn</td>
-                                <td>Support Lead</td>
-                                <td>Male</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2013/03/03</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic3.jpg" alt=""></td>
-                                <td>Charde Marshall</td>
-                                <td>Regional Director</td>
-                                <td>Female</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2008/10/16</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic4.jpg" alt=""></td>
-                                <td>Haley Kennedy</td>
-                                <td>Senior Marketing</td>
-                                <td>Male</td>
-                                <td>B.COM., M.COM.</td>
-                                <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2012/12/18</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic5.jpg" alt=""></td>
-                                <td>Tatyana Fitzpatrick</td>
-                                <td>Regional Director</td>
-                                <td>Male</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2010/03/17</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic6.jpg" alt=""></td>
-                                <td>Michael Silva</td>
-                                <td>Marketing Designer</td>
-                                <td>Female</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2012/11/27</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic7.jpg" alt=""></td>
-                                <td>Paul Byrd</td>
-                                <td>Financial Officer</td>
-                                <td>Male</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2010/06/09</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic8.jpg" alt=""></td>
-                                <td>Gloria Little</td>
-                                <td>Systems Administrator</td>
-                                <td>Female</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2009/04/10</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic9.jpg" alt=""></td>
-                                <td>Bradley Greer</td>
-                                <td>Software Engineer</td>
-                                <td>Male</td>
-                                <td>B.COM., M.COM.</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2012/10/13</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic10.jpg" alt=""></td>
-                                <td>Dai Rios</td>
-                                <td>Personnel Lead</td>
-                                <td>Male</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2012/09/26</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic1.jpg" alt=""></td>
-                                <td>Jenette Caldwell</td>
-                                <td>Development Lead</td>
-                                <td>Female</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2011/09/03</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic2.jpg" alt=""></td>
-                                <td>Yuri Berry</td>
-                                <td>Marketing Officer</td>
-                                <td>Male</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2009/06/25</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic3.jpg" alt=""></td>
-                                <td>Caesar Vance</td>
-                                <td>Pre-Sales Support</td>
-                                <td>Male</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2011/12/12</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic4.jpg" alt=""></td>
-                                <td>Doris Wilder</td>
-                                <td>Sales Assistant</td>
-                                <td>Female</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2010/09/20</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic5.jpg" alt=""></td>
-                                <td>Angelica Ramos</td>
-                                <td>Executive Officer</td>
-                                <td>Male</td>
-                                <td>B.COM., M.COM.</td>
-                                <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2009/10/09</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic6.jpg" alt=""></td>
-                                <td>Gavin Joyce</td>
-                                <td>Developer</td>
-                                <td>Female</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2010/12/22</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic7.jpg" alt=""></td>
-                                <td>Jennifer Chang</td>
-                                <td>Regional Director</td>
-                                <td>Male</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2010/11/14</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic8.jpg" alt=""></td>
-                                <td>Brenden Wagner</td>
-                                <td>Software Engineer</td>
-                                <td>Female</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2011/06/07</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic9.jpg" alt=""></td>
-                                <td>Fiona Green</td>
-                                <td>Operating Officer</td>
-                                <td>Male</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2010/03/11</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic10.jpg" alt=""></td>
-                                <td>Shou Itou</td>
-                                <td>Regional Marketing</td>
-                                <td>Female</td>
-                                <td>B.COM., M.COM.</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2011/08/14</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <app-grid [items]="talents" [columns]="columns" [itemsCount]="itemsCount"
+                    (clickRow)="onPeritemSelect($event)"></app-grid>
             </div>
         </div>
     </div>
 </div>
+
+<!-- talent detail modal -->
+<!-- The Modal -->
+<div class="modal fade" [ngClass]="{'show' : isPerDetail === true}"
+    [ngStyle]="{'display' : isPerDetail == true ? 'block' : 'none'}">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">{{selectedTalent?.first_name}} {{ selectedTalent?.last_name}}</h4>
+                <button type="button" class="close" (click)="onCloseModal()">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body talent-detail">
+                <div class="card">
+                    <div class="card-body d-flex justify-content-between border-bottom profile-bx">
+                        <div class="col-6">
+                            <div class="profile-image mb-4 text-center">
+                                <img [src]="(selectedTalent?.talent_logo== undefined || selectedTalent?.talent_logo != '') ? configService.config.hostAddress + selectedTalent?.talent_logo: 'assets/images/1.jpg'"
+                                    class="rounded-circle" width="120" height="120" alt="Company Logo">
+                            </div>
+                            <h4 class="fs-22 text-black mb-1 text-center">{{selectedTalent?.first_name}} {{
+                                selectedTalent?.last_name}}</h4>
+                            <h4 class="fs-22 text-black mb-1 text-center">Current Role :
+                                {{selectedTalent?.current_jobTitle}}</h4>
+                            <p class="mb-2 text-center">Company : <label
+                                    class="text-info">{{selectedTalent?.company?.toString()}}</label></p>
+                            <p class="mb-2 text-center">Education : <label
+                                    class="text-info">{{selectedTalent?.education??
+                                    "competitive"}}</label></p>
+                            <p class="mb-2 text-center">Email : <label class="text-info">{{selectedTalent?.talent_email
+                                    ??
+                                    ""}}</label></p>
+                            <p class="mb-2 text-center">Phone : <label
+                                    class="text-info">{{selectedTalent?.phone_number?.phoneNumber ?? ""}}</label></p>
+                            <p class="mb-2 text-center">Experience Years : <label
+                                    class="text-info">{{(selectedTalent?.years_experience == undefined) ||
+                                    (selectedTalent?.years_experience == "") ? "No Experience" :
+                                    selectedTalent?.years_experience}}</label>
+                            </p>
+                            <p class="mb-2 text-center">Region : <label class="text-info">{{selectedTalent?.region?.city
+                                    ??
+                                    "No city" }} , {{selectedTalent?.region?.state ?? " ," }}
+                                    {{ selectedTalent?.region?.country}}</label></p>
+                            <p class="mb-2 text-center">Resume : <label class="text-info">{{selectedTalent?.resume ??
+                                    ""}}</label></p>
+                            <div class="p-2">
+                                <h4 class="fs-22 text-black font-w600">Summary</h4>
+                                <span class="text-black">{{selectedTalent?.current_jobDescription}}</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+
+                            <app-vdo-player [isVideoList]="true" [videoItems]="videoItems" [currentVideo]="videoItems[0]"></app-vdo-player>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" (click)="onCloseModal()">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div [ngClass]="{'modal-backdrop show' : isPerDetail}"></div>
+<!-- end talent detail modal -->

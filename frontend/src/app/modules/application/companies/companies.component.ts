@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { CompanyService } from 'src/app/services/company/company.service';
 import { ConfigService } from 'src/app/services/config/config.service';
@@ -22,8 +22,12 @@ export class CompaniesComponent implements OnInit {
   pageLengthList: number[] = [4, 8, 12, 16];
 
   isSelectedCompany: boolean = false;
+  isPerDetail : boolean = false;
   selectedCompany = new CompanyModel();
 
+  // selected company vidoe source object
+  currentVideo : any;
+  isVideoPlayerModal : boolean = false;
   constructor(private companyService: CompanyService, public configService: ConfigService, public fb: FormBuilder) {
     this.pageLengthForm = this.fb.group({
       pageLength: [this.itemsPerPage]
@@ -68,14 +72,44 @@ export class CompaniesComponent implements OnInit {
   }
 
   // select company 
-  onSelectCompany(id : any) : void {
+  onSelectCompany(id: any): void {
     this.isSelectedCompany = true;
     this.selectedCompany = this.companies[this.companies.findIndex(item => item.id == id)]
+    console.log(this.selectedCompany);
   }
 
   // hide company detail board
-  onCloseDetailCompany(id : any) : void {
+  onCloseDetailCompany(id: any): void {
     this.isSelectedCompany = false;
     this.selectedCompany = new CompanyModel();
+  }
+
+  // on company detail modal
+  onMoreDetail() : void {
+    this.isPerDetail = true;
+  }
+
+  // closing modal
+  onCloseModal() : void{
+    this.isPerDetail = false;
+  }
+
+  // show video play modal
+  onShowVideoPlayerModal() : void {
+    this.isVideoPlayerModal = true;
+    this.currentVideo = {
+      "name" : this.selectedCompany?.name,
+      "src" : this.configService.config.hostAddress + this.selectedCompany?.video,
+      "type" : "video/mp4"
+    };
+  }
+  // hide video palyer modal
+  onHideVideoPlayerModal() : void {
+    this.isVideoPlayerModal = false;
+    this.currentVideo = {
+      "name" : "",
+      "src" : "",
+      "type" : "video/mp4"
+    };
   }
 }
