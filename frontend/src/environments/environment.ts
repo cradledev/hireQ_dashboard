@@ -15,7 +15,7 @@ export const environment = {
 
     /* LOCAL REST API CRUD WITH POSTGRESQL */
     /* api: true,
-    url: 'http://localhost:5004/', */
+    url: 'http://155.254.19.130:5004/', */
   },
 };
 

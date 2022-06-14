@@ -170,6 +170,7 @@
   },
   "defaultProject": "angular-starter",
   "cli": {
+    "analytics": "3a4003e0-a4f9-4a57-a02a-bd9b282a8d1d",
     "defaultCollection": "@angular-eslint/schematics"
   }
 }
