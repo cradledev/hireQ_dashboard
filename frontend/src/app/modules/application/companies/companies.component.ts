@@ -22,12 +22,12 @@ export class CompaniesComponent implements OnInit {
   pageLengthList: number[] = [4, 8, 12, 16];
 
   isSelectedCompany: boolean = false;
-  isPerDetail : boolean = false;
+  isPerDetail: boolean = false;
   selectedCompany = new CompanyModel();
 
   // selected company vidoe source object
-  currentVideo : any;
-  isVideoPlayerModal : boolean = false;
+  currentVideo: any;
+  isVideoPlayerModal: boolean = false;
   constructor(private companyService: CompanyService, public configService: ConfigService, public fb: FormBuilder) {
     this.pageLengthForm = this.fb.group({
       pageLength: [this.itemsPerPage]
@@ -41,14 +41,19 @@ export class CompaniesComponent implements OnInit {
   getCompanies(): void {
     this.companyService.getAllCompaniesCount(this.configService.config.endpoint + "/users/companies_count").subscribe(data => {
       this.itemsCount = data.count;
-      const page = this.itemsPage;
-      const totalPages = Math.ceil(this.itemsCount / this.itemsPerPage);
-      if (page >= totalPages) {
-        this.itemsPage = totalPages;
+      if (this.itemsCount > 0) {
+        const page = this.itemsPage;
+        const totalPages = Math.ceil(this.itemsCount / this.itemsPerPage);
+        if (page >= totalPages) {
+          this.itemsPage = totalPages;
+        }
+        this.companyService.getCompanies(this.configService.config.endpoint + "/users/company_all/" + this.itemsPage.toString() + "/" + this.itemsPerPage.toString()).subscribe((data: CompanyModel[]) => {
+          this.companies = data;
+        });
+      } else {
+        this.companies = [];
       }
-      this.companyService.getCompanies(this.configService.config.endpoint + "/users/company_all/" + this.itemsPage.toString() + "/" + this.itemsPerPage.toString()).subscribe((data: CompanyModel[]) => {
-        this.companies = data;
-      });
+      
     });
   }
 
@@ -85,31 +90,31 @@ export class CompaniesComponent implements OnInit {
   }
 
   // on company detail modal
-  onMoreDetail() : void {
+  onMoreDetail(): void {
     this.isPerDetail = true;
   }
 
   // closing modal
-  onCloseModal() : void{
+  onCloseModal(): void {
     this.isPerDetail = false;
   }
 
   // show video play modal
-  onShowVideoPlayerModal() : void {
+  onShowVideoPlayerModal(): void {
     this.isVideoPlayerModal = true;
     this.currentVideo = {
-      "name" : this.selectedCompany?.name,
-      "src" : this.configService.config.hostAddress + this.selectedCompany?.video,
-      "type" : "video/mp4"
+      "name": this.selectedCompany?.name,
+      "src": this.configService.config.hostAddress + this.selectedCompany?.video,
+      "type": "video/mp4"
     };
   }
   // hide video palyer modal
-  onHideVideoPlayerModal() : void {
+  onHideVideoPlayerModal(): void {
     this.isVideoPlayerModal = false;
     this.currentVideo = {
-      "name" : "",
-      "src" : "",
-      "type" : "video/mp4"
+      "name": "",
+      "src": "",
+      "type": "video/mp4"
     };
   }
 }

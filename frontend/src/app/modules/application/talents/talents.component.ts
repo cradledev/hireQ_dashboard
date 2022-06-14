@@ -58,14 +58,19 @@ export class TalentsComponent implements OnInit {
   getTalents(): void {
     this.talentService.executeGetQuery(this.configService.config.endpoint + "/users/talents_count").subscribe((data) => {
       this.itemsCount = data.count;
-      const page = this.itemsPage;
-      const totalPages = Math.ceil(this.itemsCount / this.itemsPerPage);
-      if (page >= totalPages) {
-        this.itemsPage = totalPages;
+      if (this.itemsCount > 0) {
+        const page = this.itemsPage;
+        const totalPages = Math.ceil(this.itemsCount / this.itemsPerPage);
+        if (page >= totalPages) {
+          this.itemsPage = totalPages;
+        }
+        this.talentService.executeGetQueryWithToken(this.configService.config.endpoint + "/talents/talents_all/" + this.itemsPage.toString() + "/" + this.itemsPerPage.toString()).subscribe((data: Talent[]) => {
+          this.talents = data;
+        });
+      } else {
+        this.talents = [];
       }
-      this.talentService.executeGetQueryWithToken(this.configService.config.endpoint + "/talents/talents_all/" + this.itemsPage.toString() + "/" + this.itemsPerPage.toString()).subscribe((data: Talent[]) => {
-        this.talents = data;
-      });
+
     });
   }
 
@@ -91,7 +96,7 @@ export class TalentsComponent implements OnInit {
   // select item per talent
   onPeritemSelect(_item: any): void {
     console.log(_item);
-    if (_item?.video_id != null && _item?.video_id != "") {
+    if (_item?.video_id != undefined && _item?.video_id != "") {
       this.talentService.executeGetQueryWithToken(this.configService.config.endpoint + "/videos/" + _item.video_id.toString()).subscribe(data => {
         data.v_data.map((element: any) => {
           this.videoItems.push({ 'name': element.description, 'src': this.configService.config.hostAddress + element.url, 'type': 'video/mp4' });
@@ -100,7 +105,7 @@ export class TalentsComponent implements OnInit {
         this.selectedTalent = _item;
       });
     } else {
-      
+
       this.isPerDetail = true;
       this.selectedTalent = _item;
     }

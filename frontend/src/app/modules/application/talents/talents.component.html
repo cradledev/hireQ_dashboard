@@ -49,7 +49,7 @@
             <div class="modal-body talent-detail">
                 <div class="card">
                     <div class="card-body d-flex justify-content-between border-bottom profile-bx">
-                        <div [ngClass]="{'col-6' : (selectedTalent?.video_id != null && selectedTalent?.video_id != ''), 'col-12' : selectedTalent?.video_id == null || selectedTalent?.video_id == '' }">
+                        <div [ngClass]="{'col-6' : (selectedTalent?.video_id != undefined && selectedTalent?.video_id != ''), 'col-12' : selectedTalent?.video_id == undefined || selectedTalent?.video_id == '' }">
                             <div class="profile-image mb-4 text-center">
                                 <img [src]="(selectedTalent?.talent_logo!= undefined && selectedTalent?.talent_logo != '') ? configService.config.hostAddress + selectedTalent?.talent_logo: 'assets/images/1.jpg'"
                                     class="rounded-circle" width="120" height="120" alt="Company Logo">
@@ -84,7 +84,7 @@
                                 <span class="text-black">{{selectedTalent?.current_jobDescription}}</span>
                             </div>
                         </div>
-                        <div class="col-6" *ngIf="selectedTalent?.video_id != null && selectedTalent?.video_id != ''">
+                        <div class="col-6" *ngIf="selectedTalent?.video_id != undefined && selectedTalent?.video_id != ''">
 
                             <app-vdo-player [isVideoList]="true" [videoItems]="videoItems" [currentVideo]="videoItems[0]"></app-vdo-player>
                         </div>
