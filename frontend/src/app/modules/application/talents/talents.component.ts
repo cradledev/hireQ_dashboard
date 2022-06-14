@@ -65,7 +65,6 @@ export class TalentsComponent implements OnInit {
       }
       this.talentService.executeGetQueryWithToken(this.configService.config.endpoint + "/talents/talents_all/" + this.itemsPage.toString() + "/" + this.itemsPerPage.toString()).subscribe((data: Talent[]) => {
         this.talents = data;
-        console.log(data[0]);
       });
     });
   }
@@ -91,7 +90,8 @@ export class TalentsComponent implements OnInit {
 
   // select item per talent
   onPeritemSelect(_item: any): void {
-    if (_item.video_id != null || _item.video_id != "") {
+    console.log(_item);
+    if (_item?.video_id != null && _item?.video_id != "") {
       this.talentService.executeGetQueryWithToken(this.configService.config.endpoint + "/videos/" + _item.video_id.toString()).subscribe(data => {
         data.v_data.map((element: any) => {
           this.videoItems.push({ 'name': element.description, 'src': this.configService.config.hostAddress + element.url, 'type': 'video/mp4' });
@@ -100,6 +100,7 @@ export class TalentsComponent implements OnInit {
         this.selectedTalent = _item;
       });
     } else {
+      
       this.isPerDetail = true;
       this.selectedTalent = _item;
     }
