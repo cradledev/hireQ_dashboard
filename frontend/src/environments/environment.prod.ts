@@ -1,3 +1,14 @@
 export const environment = {
-  production: true
+  production: true,
+  config: {
+    /* SELECT ONE OF THOSE CONFIGURATIONS */
+
+    /* LOCAL JSON (NO CRUD) */
+    endpoint: 'http://localhost/api/v1',
+    hostAddress : 'http://localhost',
+
+    /* LOCAL REST API CRUD WITH POSTGRESQL */
+    /* api: true,
+    url: 'http://localhost:5004/', */
+  },
 };

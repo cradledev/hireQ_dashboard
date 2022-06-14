@@ -8,8 +8,8 @@ export const environment = {
     /* SELECT ONE OF THOSE CONFIGURATIONS */
 
     /* LOCAL JSON (NO CRUD) */
-    endpoint: 'http://192.168.116.39:5000/api/v1',
-    hostAddress : 'http://192.168.116.39:5000'
+    endpoint: 'http://localhost/api/v1',
+    hostAddress : 'http://localhost',
 
     /* LOCAL REST API CRUD WITH POSTGRESQL */
     /* api: true,
